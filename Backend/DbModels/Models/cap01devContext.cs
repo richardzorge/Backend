@@ -1,4 +1,6 @@
 ﻿using System;
+using DbModels;
+using DbModels.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -25,6 +27,11 @@ namespace Backend.Models
 
 
         public virtual DbSet<Admins> Admins { get; set; }
+        public virtual DbSet<School> Schools { get; set; }
+        public virtual DbSet<Tournament> Tournaments { get; set; }
+        public virtual DbSet<Participant> Participants { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,8 +41,11 @@ namespace Backend.Models
                 if (!optionsBuilder.IsConfigured)
                 {
                     Logger.Debug("IsConfigured: {0}", optionsBuilder.IsConfigured);
-                    if (Settings.Instance!=null)
-                        optionsBuilder.UseNpgsql(Settings.Instance.DbConnectionString);
+                    optionsBuilder.UseNpgsql(string.Format("Host=192.168.1.60;Port=5432;Database=turnirARB;Username=postgres;Password=postgres"));
+                    //if (Settings.Instance != null)
+                    //{
+                    //    optionsBuilder.UseNpgsql(Settings.Instance.DbConnectionString);
+                    //}
                 }
             }
             catch (Exception ex)
