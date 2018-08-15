@@ -10,6 +10,7 @@ namespace DbModels
     {
         public int ID { get; set; }
         public string name { get; set; }
+        public string city { get; set; }
         public string address { get; set; }
         public DateTime event_date_time { get; set; }
         public uint min_years_old { get; set; }
@@ -19,6 +20,7 @@ namespace DbModels
         public uint weight_step { get; set; }
 
         public bool is_active { get; set; }
+        public bool is_private { get; set; }
         public DateTime change_dt { get; set; }
 
         public Tournament()
