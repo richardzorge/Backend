@@ -17,6 +17,7 @@ namespace DbModels.Models
         public string email { get; set; }
         public bool is_active { get; set; }
         public int weight { get; set; }
+        public string city { get; set; }
 
         public int year_of_birth { get; set; }
         public DateTime change_dt { get; set; }
