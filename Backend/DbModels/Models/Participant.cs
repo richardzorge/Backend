@@ -17,7 +17,7 @@ namespace DbModels.Models
         public bool is_active { get; set; }
         public int weight { get; set; }
 
-        public int years_old { get; set; }
+        public int year_of_birth { get; set; }
         public DateTime change_dt { get; set; }
 
         public Participant()
