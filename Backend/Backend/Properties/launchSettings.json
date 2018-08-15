@@ -3,15 +3,15 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44348/",
-      "sslPort": 44348
+      "applicationUrl": "https://192.168.1.60:8000/",
+      "sslPort": 0
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "ca/manage/list",
+      "launchUrl": "api_v1/Schools",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -21,10 +21,10 @@
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "APPLICATION_CONFIG": "C:\\appsettings.json"
+        "APPLICATION_CONFIG": "C:\\appsettings.json",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:52562/"
+      "applicationUrl": "http://192.168.1.40:52562/"
     }
   }
 }

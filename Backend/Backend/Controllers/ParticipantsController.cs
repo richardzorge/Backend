@@ -132,36 +132,72 @@ namespace Backend.Controllers
         [HttpPost]
         public async Task<JsonResult> PostParticipant([FromBody] Participant participant)
         {
-            if (!ModelState.IsValid)
+            string result = string.Empty;
+            try
             {
-                return BadRequest(ModelState);
+                Logger.Trace($"{ControllerName} PostParticipant(participant={participant}) IN");
+
+                if (!ModelState.IsValid)
+                {
+                    result = "not valid";
+                    return new JsonResult(result) { StatusCode = (int)System.Net.HttpStatusCode.BadRequest };
+                }
+
+                _context.Participants.Add(participant);
+                await _context.SaveChangesAsync();
+                return null;
+                //return CreatedAtAction("GetParticipant", new { id = participant.ID }, participant);
             }
-
-            _context.Participants.Add(participant);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetParticipant", new { id = participant.ID }, participant);
+            catch (Exception ex)
+            {
+                Logger.Error($"Error in {ControllerName} PostParticipant(participant={participant}) {ex}");
+                result = "internal error";
+                return new JsonResult(result) { StatusCode = (int)System.Net.HttpStatusCode.InternalServerError };
+            }
+            finally
+            {
+                Logger.Trace($"{ControllerName} PostParticipant(photo={participant}) OUT");
+            }
         }
 
         // DELETE: api/Participants/5
         [HttpDelete("{id}")]
         public async Task<JsonResult> DeleteParticipant([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
+            string result = string.Empty;
+            try
             {
-                return BadRequest(ModelState);
-            }
+                Logger.Trace($"{ControllerName} DeleteParticipant(id={id}) IN");
 
-            var participant = await _context.Participants.FindAsync(id);
-            if (participant == null)
+                if (!ModelState.IsValid)
+                {
+                    result = "not valid";
+                    return new JsonResult(result) { StatusCode = (int)System.Net.HttpStatusCode.BadRequest };
+                }
+
+                var participant = await _context.Participants.FindAsync(id);
+                if (participant == null)
+                {
+                    result = "not found";
+                    return new JsonResult(result) { StatusCode = (int)System.Net.HttpStatusCode.NotFound };
+                }
+
+                _context.Participants.Remove(participant);
+                await _context.SaveChangesAsync();
+
+                result = "ok";
+                return new JsonResult(result) { StatusCode = (int)System.Net.HttpStatusCode.OK };
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                Logger.Error($"Error in {ControllerName} DeleteParticipant(id={id}) {ex}");
+                result = "internal error";
+                return new JsonResult(result) { StatusCode = (int)System.Net.HttpStatusCode.InternalServerError };
             }
-
-            _context.Participants.Remove(participant);
-            await _context.SaveChangesAsync();
-
-            return Ok(participant);
+            finally
+            {
+                Logger.Trace($"{ControllerName} DeleteParticipant(id={id}) OUT");
+            }
         }
 
         private bool ParticipantExists(int id)

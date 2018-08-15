@@ -30,9 +30,9 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        // GET: api/Tournaments
+        // GET: api/Tournaments/"201808102200+0300"
         [HttpGet]
-        public JsonResult GetTournaments()
+        public JsonResult GetTournaments([FromRoute] string last_date_time)
         {
             try
             {
