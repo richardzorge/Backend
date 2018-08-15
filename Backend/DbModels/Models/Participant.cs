@@ -11,7 +11,7 @@ namespace DbModels.Models
         public uint ID { get; set; }
         public uint school_id { get; set; }
         public string name { get; set; }
-        public string second_name { get; set; }
+        public string patronymic { get; set; }
         public string surname { get; set; }
         public string photo_id { get; set; }
         public bool is_active { get; set; }
