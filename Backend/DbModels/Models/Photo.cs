@@ -9,7 +9,9 @@ namespace DbModels.Models
     public class Photo
     {
         public int ID { get; set; }
-        public string path { get; set; }
+        public string file_path { get; set; }
+        public string file_type { get; set; }
+        public string file_name {get;set; }
 
         public DateTime change_dt { get; set; }
 
